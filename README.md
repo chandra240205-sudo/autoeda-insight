@@ -1,5 +1,5 @@
 # Auto EDA Insight 📊
-**Intelligent Data Analytics Dashboard — Meeting 14**
+**Intelligent Data Analytics Dashboard**
 
 > Final Exam SD-1306 Data Science Programming | ITSB
 
