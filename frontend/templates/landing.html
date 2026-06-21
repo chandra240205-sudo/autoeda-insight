@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark" data-lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Auto EDA Insight — Intelligent Data Analytics Platform</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+  <style>
+    /* This page has no sidebar/topbar, so let the landing content own the page */
+    body { margin:0; }
+    .landing-page { padding: 40px 24px; max-width: 1200px; margin: 0 auto; }
+    /* Landing page header controls */
+    .lp-header-controls {
+      position: fixed;
+      top: 20px;
+      right: 24px;
+      display: flex;
+      gap: 8px;
+      z-index: 1000;
+    }
+    .lp-header-controls .ctrl-btn {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--surface);
+      border: 1px solid var(--border-2);
+      border-radius: 8px;
+      color: var(--text-2);
+      padding: 8px 14px;
+      cursor: pointer;
+      font-size: 0.82rem;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 500;
+      transition: all 0.15s;
+    }
+    .lp-header-controls .ctrl-btn:hover {
+      background: var(--surface-2);
+      color: var(--text);
+      border-color: var(--accent);
+    }
+    .lp-header-controls .ctrl-btn svg {
+      width: 16px;
+      height: 16px;
+    }
+    .lp-header-controls .lang-btn .lang-icon {
+      font-size: 1.1rem;
+    }
+    .lp-header-controls .lang-label {
+      font-weight: 600;
+    }
+    /* Hide/show sun/moon icons */
+    .lp-header-controls .theme-btn .icon-sun,
+    .lp-header-controls .theme-btn .icon-moon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .lp-header-controls .theme-btn .icon-moon {
+      display: none;
+    }
+    [data-theme="dark"] .lp-header-controls .theme-btn .icon-sun {
+      display: none;
+    }
+    [data-theme="dark"] .lp-header-controls .theme-btn .icon-moon {
+      display: flex;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Landing Page Header Controls -->
+  <div class="lp-header-controls">
+    <button class="ctrl-btn lang-btn" id="lp-lang-toggle" title="Toggle Language">
+      <span class="lang-icon">🌐</span>
+      <span class="lang-label" id="lp-lang-label">EN</span>
+    </button>
+    <button class="ctrl-btn theme-btn" id="lp-theme-toggle" title="Toggle Theme">
+      <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    </button>
+  </div>
+
+  <div class="landing-page">
+
+    <!-- HERO -->
+    <div class="lp-hero">
+      <div class="lp-hero-bg">
+        <div class="lp-orb lp-orb1"></div>
+        <div class="lp-orb lp-orb2"></div>
+        <div class="lp-orb lp-orb3"></div>
+      </div>
+      <div class="lp-hero-logos">
+        <img src="{{ url_for('static', filename='assets/images/logo_kampus-removebg-preview.png') }}" alt="Logo Kampus" class="lp-logo">
+        <div class="lp-logo-divider"></div>
+        <img src="{{ url_for('static', filename='assets/images/logo_himpunan-removebg-preview.png') }}" alt="Logo Himpunan" class="lp-logo">
+      </div>
+      <div class="lp-badge">SD-1306 Data Science Programming · Kelompok 5</div>
+      <h1 class="lp-title">Auto<span class="lp-title-accent">EDA</span> Insight</h1>
+      <p class="lp-subtitle">Platform analitik data otomatis — upload dataset dan dapatkan statistik lengkap, visualisasi interaktif, insight cerdas, serta pembersihan data dalam hitungan detik.</p>
+      <div class="lp-cta-row">
+        <a class="btn-primary lp-cta-btn" href="{{ url_for('login') }}">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+          Mulai Upload Data
+        </a>
+        <a class="btn-secondary lp-cta-btn" href="{{ url_for('app_home') }}#team">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          Kenali Tim Kami
+        </a>
+      </div>
+      <div class="lp-pills">
+        <span class="lp-pill">📊 Statistik Deskriptif</span>
+        <span class="lp-pill">📈 Visualisasi Interaktif</span>
+        <span class="lp-pill">💡 Smart Insights</span>
+        <span class="lp-pill">🧹 Data Cleaning</span>
+        <span class="lp-pill">⚖️ Comparison</span>
+        <span class="lp-pill">🔗 Korelasi</span>
+      </div>
+    </div>
+
+    <!-- FEATURE CARDS -->
+    <div class="lp-section-label">FITUR UNGGULAN</div>
+    <div class="lp-features">
+      <a class="lp-feature-card" href="{{ url_for('app_home') }}#upload">
+        <div class="lp-feature-icon" style="background:rgba(124,109,250,0.12);color:#7c6dfa">📤</div>
+        <div class="lp-feature-title">Upload & Analisis Instan</div>
+        <div class="lp-feature-desc">Dukung format CSV, Excel (.xlsx/.xls), dan TXT. Dataset dianalisis otomatis — tipe data, missing, dan statistik dasar langsung tersedia.</div>
+        <div class="lp-feature-arrow">→</div>
+      </a>
+      <a class="lp-feature-card" href="{{ url_for('app_home') }}#stats-numerical">
+        <div class="lp-feature-icon" style="background:rgba(0,212,170,0.12);color:#00d4aa">📊</div>
+        <div class="lp-feature-title">Statistik Komprehensif</div>
+        <div class="lp-feature-desc">Mean, median, std, skewness, kurtosis, uji normalitas, outlier count — untuk semua kolom numerik dan kategorik.</div>
+        <div class="lp-feature-arrow">→</div>
+      </a>
+      <a class="lp-feature-card" href="{{ url_for('app_home') }}#viz-numerical">
+        <div class="lp-feature-icon" style="background:rgba(91,143,255,0.12);color:#5b8fff">📈</div>
+        <div class="lp-feature-title">Visualisasi Interaktif</div>
+        <div class="lp-feature-desc">Pilih jenis visual via dropdown: Histogram, Boxplot, Density, QQ Plot, Violin, Bar, Pie, Pareto. Satu visual, fokus penuh.</div>
+        <div class="lp-feature-arrow">→</div>
+      </a>
+      <a class="lp-feature-card" href="{{ url_for('app_home') }}#viz-comparison">
+        <div class="lp-feature-icon" style="background:rgba(255,107,107,0.12);color:#ff6b6b">⚖️</div>
+        <div class="lp-feature-title">Visual Comparison</div>
+        <div class="lp-feature-desc">Bandingkan distribusi hingga 5 kolom sekaligus — overlay histogram, boxplot, violin, atau bar dalam satu grafik.</div>
+        <div class="lp-feature-arrow">→</div>
+      </a>
+      <a class="lp-feature-card" href="{{ url_for('app_home') }}#data-cleaning">
+        <div class="lp-feature-icon" style="background:rgba(255,193,7,0.12);color:#ffc107">🧹</div>
+        <div class="lp-feature-title">Data Cleaning</div>
+        <div class="lp-feature-desc">Deteksi missing values, duplikat, outlier (IQR), masalah tipe data, dan whitespace. Pilih aksi — bersihkan atau biarkan.</div>
+        <div class="lp-feature-arrow">→</div>
+      </a>
+      <a class="lp-feature-card" href="{{ url_for('app_home') }}#insights">
+        <div class="lp-feature-icon" style="background:rgba(175,100,255,0.12);color:#af64ff">💡</div>
+        <div class="lp-feature-title">Smart Insights</div>
+        <div class="lp-feature-desc">Interpretasi otomatis berbasis statistik — temukan pola tersembunyi, anomali, dan rekomendasi dari data Anda.</div>
+        <div class="lp-feature-arrow">→</div>
+      </a>
+    </div>
+
+    <!-- HOW IT WORKS -->
+    <div class="lp-section-label">CARA KERJA</div>
+    <div class="lp-steps">
+      <div class="lp-step">
+        <div class="lp-step-num">01</div>
+        <div class="lp-step-title">Upload Dataset</div>
+        <div class="lp-step-desc">Drag & drop atau browse file CSV / Excel / TXT (maks. 50MB)</div>
+      </div>
+      <div class="lp-step-arrow">→</div>
+      <div class="lp-step">
+        <div class="lp-step-num">02</div>
+        <div class="lp-step-title">Analisis Otomatis</div>
+        <div class="lp-step-desc">Statistik, tipe kolom, dan kualitas data langsung dideteksi</div>
+      </div>
+      <div class="lp-step-arrow">→</div>
+      <div class="lp-step">
+        <div class="lp-step-num">03</div>
+        <div class="lp-step-title">Eksplorasi & Bersihkan</div>
+        <div class="lp-step-desc">Visualisasi interaktif, comparison, cleaning, dan insight</div>
+      </div>
+      <div class="lp-step-arrow">→</div>
+      <div class="lp-step">
+        <div class="lp-step-num">04</div>
+        <div class="lp-step-title">Export Hasil</div>
+        <div class="lp-step-desc">Download laporan PDF, CSV, Excel, atau HTML dashboard</div>
+      </div>
+    </div>
+
+    <!-- TEAM PREVIEW -->
+    <div class="lp-section-label">TIM PENGEMBANG</div>
+    <div class="lp-team-intro">
+      <div>
+        <div class="lp-team-title">Kelompok 5 · Kelas B · ITSB</div>
+        <div class="lp-team-sub">SD-1306 Data Science Programming &nbsp;·&nbsp; Dosen: <strong>Bakti Siregar, M.Sc.</strong></div>
+      </div>
+      <a class="btn-secondary" href="{{ url_for('app_home') }}#team" style="white-space:nowrap">Lihat Profil Tim →</a>
+    </div>
+
+    <div class="team-grid lp-team-grid">
+      <div class="team-card">
+        <div class="team-card-top">
+          <div class="team-avatar" style="background: linear-gradient(135deg, #00d4aa, #0099ff)">
+            <img src="/static/assets/images/member1.jpg" alt="Muhammad Nabil" onerror="this.style.display='none'" />
+            <span class="avatar-initials">MN</span>
+          </div>
+          <div class="team-role-badge leader-badge">Project Lead</div>
+        </div>
+        <div class="team-card-body">
+          <h3 class="team-name">Muhammad Nabil Khairil Anam</h3>
+          <p class="team-role">Project Manager & Backend Developer</p>
+        </div>
+      </div>
+
+      <div class="team-card">
+        <div class="team-card-top">
+          <div class="team-avatar" style="background: linear-gradient(135deg, #5b8fff, #af64ff)">
+            <img src="/static/assets/images/member2.jpg" alt="Chandra Rizal" onerror="this.style.display='none'" />
+            <span class="avatar-initials">CR</span>
+          </div>
+          <div class="team-role-badge backend-badge">Backend Dev</div>
+        </div>
+        <div class="team-card-body">
+          <h3 class="team-name">Chandra Rizal Alamsyah</h3>
+          <p class="team-role">Backend Developer & Data Engineer</p>
+        </div>
+      </div>
+
+      <div class="team-card">
+        <div class="team-card-top">
+          <div class="team-avatar" style="background: linear-gradient(135deg, #ff9933, #ff5050)">
+            <img src="/static/assets/images/member3.jpg" alt="Lulu Najla" onerror="this.style.display='none'" />
+            <span class="avatar-initials">LN</span>
+          </div>
+          <div class="team-role-badge frontend-badge">Frontend Dev</div>
+        </div>
+        <div class="team-card-body">
+          <h3 class="team-name">Lulu Najla Salsabilla</h3>
+          <p class="team-role">Frontend Developer & UI/UX Design</p>
+        </div>
+      </div>
+
+      <div class="team-card">
+        <div class="team-card-top">
+          <div class="team-avatar" style="background: linear-gradient(135deg, #af64ff, #ff5050)">
+            <img src="/static/assets/images/member4.jpg" alt="Naila Syahrani" onerror="this.style.display='none'" />
+            <span class="avatar-initials">NS</span>
+          </div>
+          <div class="team-role-badge analyst-badge">Data Analyst</div>
+        </div>
+        <div class="team-card-body">
+          <h3 class="team-name">Naila Syahrani Putri</h3>
+          <p class="team-role">Data Analyst & Documentation</p>
+        </div>
+      </div>
+
+      <div class="team-card">
+        <div class="team-card-top">
+          <div class="team-avatar" style="background: linear-gradient(135deg, #00d4aa, #af64ff)">
+            <img src="/static/assets/images/member5.jpg" alt="Dameria Adelina" onerror="this.style.display='none'" />
+            <span class="avatar-initials">DA</span>
+          </div>
+          <div class="team-role-badge viz-badge">Visualization</div>
+        </div>
+        <div class="team-card-body">
+          <h3 class="team-name">Dameria Adelina Mini Simarmata</h3>
+          <p class="team-role">Data Visualization Specialist</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+<script>
+// Landing Page Theme & Language Controls
+const LP_TRANSLATIONS = {
+  en: {
+    badge: 'SD-1306 Data Science Programming · Group 5',
+    subtitle: 'Automated data analytics platform - upload a dataset and get complete statistics, interactive visualizations, smart insights, and data cleaning in seconds.',
+    ctaUpload: 'Start Uploading Data',
+    ctaTeam: 'Meet Our Team',
+    pills: ['Descriptive Statistics', 'Interactive Visualizations', 'Smart Insights', 'Data Cleaning', 'Comparison', 'Correlation'],
+    sectionFeatures: 'KEY FEATURES',
+    featureTitles: ['Instant Upload & Analysis', 'Comprehensive Statistics', 'Interactive Visualizations', 'Visual Comparison', 'Data Cleaning', 'Smart Insights'],
+    featureDescs: [
+      'Supports CSV, Excel (.xlsx/.xls), and TXT. Datasets are analyzed automatically - data types, missing values, and basic statistics are available immediately.',
+      'Mean, median, std, skewness, kurtosis, normality tests, and outlier count - for every numerical and categorical column.',
+      'Choose visualization types from a dropdown: Histogram, Boxplot, Density, QQ Plot, Violin, Bar, Pie, Pareto. One focused visual at a time.',
+      'Compare distributions across up to 5 columns at once - overlay histogram, boxplot, violin, or bar chart in one graph.',
+      'Detect missing values, duplicates, outliers (IQR), data type issues, and whitespace. Choose an action - clean it or leave it as is.',
+      'Automatic statistical interpretation - find hidden patterns, anomalies, and recommendations from your data.'
+    ],
+    sectionSteps: 'HOW IT WORKS',
+    stepTitles: ['Upload Dataset', 'Automatic Analysis', 'Explore & Clean', 'Export Results'],
+    stepDescs: [
+      'Drag & drop or browse a CSV / Excel / TXT file (max. 50MB)',
+      'Statistics, column types, and data quality are detected immediately',
+      'Interactive visualization, comparison, cleaning, and insights',
+      'Download PDF, CSV, Excel, or HTML dashboard reports'
+    ],
+    sectionTeam: 'DEVELOPMENT TEAM',
+    teamTitle: 'Group 5 · Class B · ITSB',
+    teamSub: 'SD-1306 Data Science Programming · Lecturer:',
+    teamLink: 'View Team Profile ->',
+    roleLead: 'Project Lead',
+    roleBackend: 'Backend Dev',
+    roleFrontend: 'Frontend Dev',
+    roleAnalyst: 'Data Analyst',
+    roleViz: 'Visualization',
+    roleLeadDesc: 'Project Manager & Backend Developer',
+    roleBackendDesc: 'Backend Developer & Data Engineer',
+    roleFrontendDesc: 'Frontend Developer & UI/UX Design',
+    roleAnalystDesc: 'Data Analyst & Documentation',
+    roleVizDesc: 'Data Visualization Specialist'
+  },
+  id: {
+    badge: 'SD-1306 Data Science Programming · Kelompok 5',
+    subtitle: 'Platform analitik data otomatis - upload dataset dan dapatkan statistik lengkap, visualisasi interaktif, insight cerdas, serta pembersihan data dalam hitungan detik.',
+    ctaUpload: 'Mulai Upload Data',
+    ctaTeam: 'Kenali Tim Kami',
+    pills: ['Statistik Deskriptif', 'Visualisasi Interaktif', 'Smart Insights', 'Data Cleaning', 'Comparison', 'Korelasi'],
+    sectionFeatures: 'FITUR UNGGULAN',
+    featureTitles: ['Upload & Analisis Instan', 'Statistik Komprehensif', 'Visualisasi Interaktif', 'Visual Comparison', 'Data Cleaning', 'Smart Insights'],
+    featureDescs: [
+      'Dukung format CSV, Excel (.xlsx/.xls), dan TXT. Dataset dianalisis otomatis - tipe data, missing, dan statistik dasar langsung tersedia.',
+      'Mean, median, std, skewness, kurtosis, uji normalitas, outlier count - untuk semua kolom numerik dan kategorik.',
+      'Pilih jenis visual via dropdown: Histogram, Boxplot, Density, QQ Plot, Violin, Bar, Pie, Pareto. Satu visual, fokus penuh.',
+      'Bandingkan distribusi hingga 5 kolom sekaligus - overlay histogram, boxplot, violin, atau bar dalam satu grafik.',
+      'Deteksi missing values, duplikat, outlier (IQR), masalah tipe data, dan whitespace. Pilih aksi - bersihkan atau biarkan.',
+      'Interpretasi otomatis berbasis statistik - temukan pola tersembunyi, anomali, dan rekomendasi dari data Anda.'
+    ],
+    sectionSteps: 'CARA KERJA',
+    stepTitles: ['Upload Dataset', 'Analisis Otomatis', 'Eksplorasi & Bersihkan', 'Export Hasil'],
+    stepDescs: [
+      'Drag & drop atau browse file CSV / Excel / TXT (maks. 50MB)',
+      'Statistik, tipe kolom, dan kualitas data langsung dideteksi',
+      'Visualisasi interaktif, comparison, cleaning, dan insight',
+      'Download laporan PDF, CSV, Excel, atau HTML dashboard'
+    ],
+    sectionTeam: 'TIM PENGEMBANG',
+    teamTitle: 'Kelompok 5 · Kelas B · ITSB',
+    teamSub: 'SD-1306 Data Science Programming · Dosen:',
+    teamLink: 'Lihat Profil Tim ->',
+    roleLead: 'Project Lead',
+    roleBackend: 'Backend Dev',
+    roleFrontend: 'Frontend Dev',
+    roleAnalyst: 'Data Analyst',
+    roleViz: 'Visualization',
+    roleLeadDesc: 'Project Manager & Backend Developer',
+    roleBackendDesc: 'Backend Developer & Data Engineer',
+    roleFrontendDesc: 'Frontend Developer & UI/UX Design',
+    roleAnalystDesc: 'Data Analyst & Documentation',
+    roleVizDesc: 'Data Visualization Specialist'
+  }
+};
+
+const lpState = {
+  lang: localStorage.getItem('eda_lang') || 'en',
+  theme: localStorage.getItem('eda_theme') || 'dark',
+};
+
+// Apply theme and language on page load
+document.addEventListener('DOMContentLoaded', () => {
+  applyLPTheme(lpState.theme);
+  applyLPLang(lpState.lang);
+  initLPControls();
+});
+
+function applyLPTheme(theme) {
+  document.documentElement.setAttribute('data-theme', theme);
+  lpState.theme = theme;
+  localStorage.setItem('eda_theme', theme);
+}
+
+function applyLPLang(lang) {
+  lpState.lang = lang;
+  localStorage.setItem('eda_lang', lang);
+  document.documentElement.setAttribute('data-lang', lang);
+  document.getElementById('lp-lang-label').textContent = lang.toUpperCase();
+  const copy = LP_TRANSLATIONS[lang] || LP_TRANSLATIONS.en;
+  const setText = (selector, value) => {
+    const el = document.querySelector(selector);
+    if (el) el.textContent = value;
+  };
+  const setList = (selector, values) => {
+    document.querySelectorAll(selector).forEach((el, i) => {
+      if (values[i]) el.textContent = values[i];
+    });
+  };
+  const setButtonLabel = (selector, value) => {
+    const el = document.querySelector(selector);
+    if (!el) return;
+    let label = el.querySelector('[data-lp-label]');
+    if (!label) {
+      Array.from(el.childNodes).forEach(node => {
+        if (node.nodeType === Node.TEXT_NODE && node.textContent.trim()) node.remove();
+      });
+      label = document.createElement('span');
+      label.setAttribute('data-lp-label', '');
+      el.appendChild(label);
+    }
+    label.textContent = value;
+  };
+
+  setText('.lp-badge', copy.badge);
+  setText('.lp-subtitle', copy.subtitle);
+  setButtonLabel('.lp-cta-row .lp-cta-btn:nth-child(1)', copy.ctaUpload);
+  setButtonLabel('.lp-cta-row .lp-cta-btn:nth-child(2)', copy.ctaTeam);
+  setList('.lp-pill', copy.pills);
+  const labels = document.querySelectorAll('.lp-section-label');
+  if (labels[0]) labels[0].textContent = copy.sectionFeatures;
+  if (labels[1]) labels[1].textContent = copy.sectionSteps;
+  if (labels[2]) labels[2].textContent = copy.sectionTeam;
+  setList('.lp-feature-title', copy.featureTitles);
+  setList('.lp-feature-desc', copy.featureDescs);
+  setList('.lp-step-title', copy.stepTitles);
+  setList('.lp-step-desc', copy.stepDescs);
+  setText('.lp-team-title', copy.teamTitle);
+  const teamSub = document.querySelector('.lp-team-sub');
+  if (teamSub) teamSub.innerHTML = `${copy.teamSub} <strong>Bakti Siregar, M.Sc.</strong>`;
+  const teamLink = document.querySelector('.lp-team-intro .btn-secondary');
+  if (teamLink) teamLink.textContent = copy.teamLink;
+  setList('.lp-team-grid .team-role-badge', [copy.roleLead, copy.roleBackend, copy.roleFrontend, copy.roleAnalyst, copy.roleViz]);
+  setList('.lp-team-grid .team-role', [copy.roleLeadDesc, copy.roleBackendDesc, copy.roleFrontendDesc, copy.roleAnalystDesc, copy.roleVizDesc]);
+}
+
+function initLPControls() {
+  document.getElementById('lp-theme-toggle').addEventListener('click', () => {
+    applyLPTheme(lpState.theme === 'dark' ? 'light' : 'dark');
+  });
+  
+  document.getElementById('lp-lang-toggle').addEventListener('click', () => {
+    applyLPLang(lpState.lang === 'en' ? 'id' : 'en');
+  });
+}
+</script>
+
+</body>
+</html>

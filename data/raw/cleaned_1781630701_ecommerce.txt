@@ -1,0 +1,37 @@
+order_id,order_date,ship_date,platform,category,product_name,unit_price,quantity,gross_sales,campaign,voucher_code,discount_pct,discount_value,shipping_cost,net_sales,payment_method,customer_segment,region,stock_status,order_status,customer_rating,priority_flag
+612,2024-04-19,2024-04-24,Tokopedia,Home Living,Table Lamp,188905,4,755620,Flash Sale,10.0,10.0,75562,12000,680058,E-Wallet,Vip,Bekasi,Preorder,Completed,5.0,Y
+1314,2024-07-26,2024-07-28,Tokopedia,Sports,Skipping Rope,831730,1,831730,Clearance,30.0,30.0,249519,25000,582211,Virtual Account,Returning,Bekasi,In Stock,Delivered,5.0,Normal
+515,2024-07-13,2024-07-15,Tokopedia,Home Living,Vacuum Cleaner,1058403,2,2116806,Payday Sale,15.0,15.0,317521,12000,1799285,COD,New,Yogyakarta,Preorder,Completed,4.0,No
+1387,2024-11-18,2024-11-25,Shopee,Sports,Dumbbell 5Kg,767172,2,1534344,Mega Campaign,20.0,20.0,306869,12000,1227475,Virtual Account,Vip,Bekasi,In Stock,Delivered,4.0,Priority
+586,2024-12-14,2024-12-17,Blibli,Fashion,Women Dress,427999,2,855998,Flash Sale,10.0,10.0,85600,12000,770398,Bank Transfer,Vip,Bandung,In Stock,Delivered,5.0,Yes
+317,2024-01-13,2024-01-17,Shopee,Fashion,Hoodie,546769,4,2187076,Mega Campaign,20.0,20.0,437415,20000,1749661,Virtual Account,Returning,Bekasi,Preorder,Delivered,5.0,Yes
+234,2024-12-29,2025-01-03,Blibli,Fashion,Jeans,408041,3,1224123,Flash Sale,10.0,10.0,122412,15000,1101711,Credit Card,Returning,Jakarta,In Stock,Delivered,3.0,Normal
+240,2024-07-03,2024-07-10,Tiktok Shop,Beauty,Skincare Serum,324301,3,972903,Mega Campaign,20.0,20.0,194581,20000,778322,COD,Returning,Bandung,In Stock,Completed,5.0,N
+465,2024-05-06,2024-05-08,Tokopedia,Sports,Dumbbell 5Kg,706683,3,2120049,Clearance,30.0,30.0,636015,18000,1484034,Virtual Account,New,Bekasi,In Stock,Completed,5.0,N
+680,2024-09-04,2024-09-12,Tiktok Shop,Sports,Dumbbell 5Kg,554034,4,2216136,Mega Campaign,20.0,20.0,443227,25000,1772909,COD,Returning,Yogyakarta,In Stock,Delivered,5.0,Yes
+1813,2024-12-12,2024-12-19,Blibli,Electronics,Bluetooth Speaker,962967,1,962967,Clearance,30.0,30.0,288890,20000,674077,E-Wallet,New,Jakarta,In Stock,Completed,4.0,Normal
+472,2024-02-03,2024-02-10,Shopee,Sports,Dumbbell 5Kg,588489,2,1176978,Flash Sale,10.0,10.0,117698,20000,1059280,COD,Returning,Yogyakarta,In Stock,Delivered,4.0,N
+426,2024-12-29,2025-01-02,Lazada,Sports,Cycling Gloves,86307,5,431535,Flash Sale,10.0,10.0,43154,9000,388381,COD,Vip,Semarang,In Stock,Delivered,3.0,Yes
+1566,2024-05-29,2024-06-01,Blibli,Beauty,Face Wash,51484,3,154452,Payday Sale,15.0,15.0,23168,9000,131284,COD,Returning,Makassar,Preorder,Delivered,5.0,No
+745,2024-05-08,2024-05-13,Lazada,Home Living,Table Lamp,739206,2,1478412,Flash Sale,10.0,10.0,147841,15000,1330571,Virtual Account,Returning,Semarang,In Stock,Completed,5.0,No
+752,2024-11-23,2024-11-25,Shopee,Beauty,Sunscreen,259703,2,519406,Payday Sale,15.0,15.0,77911,15000,441495,Bank Transfer,Returning,Surabaya,In Stock,Delivered,5.0,No
+1959,2024-06-26,2024-06-28,Blibli,Fashion,Hoodie,385105,1,385105,Flash Sale,10.0,10.0,38510,9000,346595,Bank Transfer,Returning,Surabaya,In Stock,Delivered,5.0,Normal
+458,2024-04-20,2024-04-21,Tiktok Shop,Fashion,Hoodie,198270,1,198270,Flash Sale,10.0,10.0,19827,25000,178443,Credit Card,Vip,Yogyakarta,In Stock,Delivered,5.0,Yes
+833,2024-08-25,2024-08-27,Blibli,Home Living,Storage Box,929959,1,929959,Flash Sale,10.0,10.0,92996,25000,836963,E-Wallet,New,Bekasi,In Stock,Delivered,4.0,Normal
+1334,2024-06-02,2024-06-05,Shopee,Fashion,Men T-Shirt,370973,5,1854865,Flash Sale,10.0,10.0,185486,12000,1669379,Credit Card,New,Makassar,In Stock,Delivered,4.0,Normal
+411,2024-11-20,2024-11-22,Shopee,Fashion,Hoodie,370988,1,370988,Clearance,30.0,30.0,111296,18000,259692,Credit Card,Returning,Yogyakarta,In Stock,Completed,3.0,No
+637,2024-03-03,2024-03-07,Tokopedia,Sports,Skipping Rope,629351,3,1888053,Clearance,30.0,30.0,566416,20000,1321637,E-Wallet,Returning,Yogyakarta,In Stock,Delivered,3.0,Normal
+606,2024-12-17,2024-12-19,Tiktok Shop,Home Living,Storage Box,427081,2,854162,Clearance,30.0,30.0,256249,0,597913,COD,Returning,Yogyakarta,In Stock,Delivered,4.0,Normal
+595,2024-12-07,2024-12-09,Lazada,Sports,Skipping Rope,197817,3,593451,Clearance,30.0,30.0,178035,15000,415416,E-Wallet,Returning,Yogyakarta,Low Stock,Delivered,5.0,N
+363,2024-03-14,2024-03-16,Blibli,Beauty,Body Lotion,155437,4,621748,Mega Campaign,20.0,20.0,124350,20000,497398,COD,New,Makassar,Low Stock,Completed,4.0,N
+1824,2024-12-17,2024-12-22,Shopee,Fashion,Women Dress,235204,3,705612,Flash Sale,10.0,10.0,70561,20000,635051,Bank Transfer,New,Surabaya,In Stock,Completed,5.0,No
+1741,2024-05-01,2024-05-02,Shopee,Beauty,Skincare Serum,270229,2,540458,Flash Sale,10.0,10.0,54046,12000,486412,COD,New,Bekasi,In Stock,Completed,5.0,No
+476,2024-02-07,2024-02-08,Shopee,Sports,Skipping Rope,129689,1,129689,Payday Sale,15.0,15.0,19453,0,110236,E-Wallet,Vip,Semarang,Preorder,Completed,5.0,Priority
+1420,2024-06-30,2024-07-02,Lazada,Sports,Skipping Rope,680180,3,2040540,Mega Campaign,20.0,20.0,408108,25000,1632432,Credit Card,Returning,Yogyakarta,In Stock,Delivered,5.0,Yes
+727,2024-07-25,2024-07-31,Lazada,Electronics,Phone Charger,409708,3,1229124,Clearance,30.0,30.0,368737,9000,860387,Credit Card,New,Jakarta,In Stock,Delivered,5.0,N
+1830,2024-07-23,2024-07-30,Shopee,Sports,Yoga Mat,781808,3,2345424,Flash Sale,10.0,10.0,234542,20000,2110882,Credit Card,Returning,Bandung,In Stock,Completed,4.0,No
+1684,2024-03-13,2024-03-15,Tokopedia,Sports,Skipping Rope,132757,4,531028,Flash Sale,10.0,10.0,53103,25000,477925,Bank Transfer,Returning,Makassar,In Stock,Delivered,5.0,N
+1301,2024-06-16,2024-06-23,Shopee,Sports,Cycling Gloves,241171,5,1205855,Mega Campaign,20.0,20.0,241171,20000,964684,Credit Card,New,Makassar,In Stock,Delivered,5.0,No
+1750,2024-05-03,2024-05-07,Shopee,Electronics,Power Bank,497004,5,2485020,Mega Campaign,20.0,20.0,497004,18000,1988016,E-Wallet,Returning,Bandung,Low Stock,Delivered,4.0,Y
+609,2024-03-29,2024-03-31,Blibli,Fashion,Sneakers,177892,1,177892,Flash Sale,10.0,10.0,17789,25000,160103,COD,Returning,Makassar,In Stock,Delivered,5.0,Normal
+752,2024-11-23,2024-11-25,Shopee,Beauty,Sunscreen,259703,2,519406,Payday Sale,15.0,15.0,77911,15000,441495,Bank Transfer,Returning,Surabaya,In Stock,Delivered,5.0,Normal

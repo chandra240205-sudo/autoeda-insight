@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark" data-lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Auto EDA Insight - Intelligent Data Analytics Platform</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+</head>
+<body>
+
+<!-- ===== SIDEBAR ===== -->
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-brand">
+    <img src="{{ url_for('static', filename='assets/images/logo_kampus-removebg-preview.png') }}" alt="Logo Kampus" class="logo-img">
+    <div class="brand-text">
+      <span class="brand-name">AutoEDA</span>
+      <span class="brand-sub" data-i18n="brand_sub">Insight Platform</span>
+    </div>
+    <img src="{{ url_for('static', filename='assets/images/logo_himpunan-removebg-preview.png') }}" alt="Logo Himpunan" class="logo-img">
+  </div>
+
+  <nav class="sidebar-nav">
+    <div class="nav-section-label" data-i18n="nav_main">MAIN</div>
+
+    <a href="#" class="nav-item active" data-section="dashboard">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+      <span data-i18n="nav_dashboard">Dashboard</span>
+    </a>
+    <a href="#" class="nav-item" data-section="upload">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+      <span data-i18n="nav_upload">Upload Data</span>
+    </a>
+    <a href="#" class="nav-item" data-section="preview">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
+      <span data-i18n="nav_preview">Data Preview</span>
+    </a>
+
+    <div class="nav-section-label" data-i18n="nav_analytics">ANALYTICS</div>
+
+    <a href="#" class="nav-item" data-section="stats-numerical">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+      <span data-i18n="nav_numerical">Numerical Stats</span>
+    </a>
+    <a href="#" class="nav-item" data-section="stats-categorical">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+      <span data-i18n="nav_categorical">Categorical Stats</span>
+    </a>
+
+    <div class="nav-section-label" data-i18n="nav_viz_label">VISUALIZATION</div>
+    <a href="#" class="nav-item" data-section="viz-numerical">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="12" width="4" height="9"/><rect x="10" y="7" width="4" height="14"/><rect x="17" y="3" width="4" height="18"/></svg>
+      <span data-i18n="nav_viz_num">Numerical Viz</span>
+    </a>
+    <a href="#" class="nav-item" data-section="viz-categorical">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+      <span data-i18n="nav_viz_cat">Categorical Viz</span>
+    </a>
+    <a href="#" class="nav-item" data-section="viz-bivariate">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="7" cy="7" r="3"/><circle cx="17" cy="17" r="3"/><line x1="9.5" y1="9.5" x2="14.5" y2="14.5"/></svg>
+      <span data-i18n="nav_viz_biv">Correlation &amp; Multivariate</span>
+    </a>
+    <a href="#" class="nav-item" data-section="viz-catnum">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+      <span data-i18n="nav_viz_cn">Cat vs Numerical</span>
+    </a>
+    <a href="#" class="nav-item" data-section="viz-timeseries" id="nav-ts" style="display:none">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+      <span data-i18n="nav_viz_ts">Temporal Analytics</span>
+    </a>
+        <a href="#" class="nav-item" data-section="viz-comparison">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+      <span data-i18n="nav_viz_comp">Comparison</span>
+    </a>
+    <a href="#" class="nav-item" data-section="insights">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8zm-1-5h2v2h-2zm0-8h2v6h-2z"/></svg>
+      <span data-i18n="nav_insights">Smart Insights</span>
+    </a>
+
+        <div class="nav-section-label" data-i18n="nav_data_quality">DATA QUALITY</div>
+    <a href="#" class="nav-item" data-section="data-cleaning">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M8 6V4h8v2M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0v12m4-12v12m4-12v12"/></svg>
+      <span data-i18n="nav_cleaning">Data Cleaning</span>
+    </a>
+    
+    <div class="nav-section-label" data-i18n="nav_team_section">TEAM</div>
+    <a href="#" class="nav-item" data-section="team">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      <span data-i18n="nav_team">Our Team</span>
+    </a>
+
+    <a href="#" class="nav-item" data-section="profile">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4z"/><path d="M4 20c0-4 3.58-6 8-6s8 2 8 6"/></svg>
+      <span data-i18n="nav_profile">Akun Saya</span>
+    </a>
+  </nav>
+
+  <div class="sidebar-footer">
+    <div class="dataset-info" id="sidebar-dataset-info" style="display:none">
+      <div class="di-label" data-i18n="di_active">Active Dataset</div>
+      <div class="di-name" id="sidebar-filename">-</div>
+      <div class="di-meta" id="sidebar-meta">-</div>
+    </div>
+  </div>
+</aside>
+
+<!-- ===== MAIN CONTENT ===== -->
+<div class="main-wrapper">
+
+  <!-- TOP BAR -->
+  <header class="topbar">
+    <div class="topbar-left">
+      <button class="sidebar-toggle" id="sidebar-toggle" title="Toggle Sidebar">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+      <div class="page-title" id="page-title">Dashboard</div>
+    </div>
+    <div class="topbar-right">
+      <!-- Theme Toggle -->
+      <button class="ctrl-btn theme-btn" id="theme-toggle" title="Toggle Theme">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+      <button class="ctrl-btn lang-btn" id="lang-toggle" title="Toggle Language">
+        <span class="lang-icon">🌐</span>
+        <span class="lang-label" id="lang-label">EN</span>
+      </button>
+      <div class="topbar-divider"></div>
+      <div class="export-dropdown" id="export-dropdown">
+        <button class="ctrl-btn export-dropdown-toggle" id="export-dropdown-toggle" type="button" aria-haspopup="true" aria-expanded="false" title="Export options">
+          <span>Export</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="export-dropdown-menu" id="export-dropdown-menu" role="menu" aria-label="Export options">
+          <button class="ctrl-btn export-dropdown-item" type="button" onclick="exportData('csv')">CSV</button>
+          <button class="ctrl-btn export-dropdown-item" type="button" onclick="exportData('excel')">XLSX</button>
+          <button class="ctrl-btn export-dropdown-item" type="button" onclick="exportPDFReport()">PDF</button>
+          <button class="ctrl-btn export-dropdown-item" type="button" onclick="exportHTMLDashboard()">HTML</button>
+        </div>
+      </div>
+      {% if user %}
+        <span class="user-chip">Hi, <span id="topbar-user-label">{{ user }}</span></span>
+        <button class="ctrl-btn btn-danger" onclick="window.location.href='{{ url_for('logout') }}'" title="Logout">Logout</button>
+      {% endif %}
+    </div>
+  </header>
+
+  <!-- CONTENT AREA -->
+  <main class="content" id="content-area">
+
+    <!-- ===== SECTION: DASHBOARD ===== -->
+    <section class="section active" id="section-dashboard">
+      <div class="welcome-hero">
+        <div class="hero-text">
+          <h1 data-i18n="hero_title">Intelligent Data Analytics</h1>
+          <p data-i18n="hero_sub">Upload your dataset and get instant automated insights, statistics, and visualizations - powered by AI-driven EDA.</p>
+          <button class="btn-primary" onclick="switchSection('upload')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+            <span data-i18n="hero_cta">Upload Dataset</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Summary Cards (shown after upload) -->
+      <div class="summary-cards" id="summary-cards" style="display:none">
+        <div class="card stat-card">
+          <div class="stat-icon rows-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3h18v4H3z"/><path d="M3 10h18v4H3z"/><path d="M3 17h18v4H3z"/></svg>
+          </div>
+          <div class="stat-body">
+            <div class="stat-value" id="stat-rows">-</div>
+            <div class="stat-label" data-i18n="stat_rows">Total Rows</div>
+          </div>
+        </div>
+        <div class="card stat-card">
+          <div class="stat-icon cols-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="4" height="18" rx="1"/><rect x="10" y="3" width="4" height="18" rx="1"/><rect x="17" y="3" width="4" height="18" rx="1"/></svg>
+          </div>
+          <div class="stat-body">
+            <div class="stat-value" id="stat-cols">-</div>
+            <div class="stat-label" data-i18n="stat_cols">Total Columns</div>
+          </div>
+        </div>
+        <div class="card stat-card">
+          <div class="stat-icon num-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+          </div>
+          <div class="stat-body">
+            <div class="stat-value" id="stat-num">-</div>
+            <div class="stat-label" data-i18n="stat_numerical">Numerical</div>
+          </div>
+        </div>
+        <div class="card stat-card">
+          <div class="stat-icon cat-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+          </div>
+          <div class="stat-body">
+            <div class="stat-value" id="stat-cat">-</div>
+            <div class="stat-label" data-i18n="stat_categorical">Categorical</div>
+          </div>
+        </div>
+        <div class="card stat-card">
+          <div class="stat-icon miss-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg>
+          </div>
+          <div class="stat-body">
+            <div class="stat-value" id="stat-missing">-</div>
+            <div class="stat-label" data-i18n="stat_missing">Missing Cells</div>
+          </div>
+        </div>
+      </div>
+      <div id="dashboard-overview-holder" style="display:none; margin-top:16px"></div>
+
+      <!-- Column Type Map (shown after upload) -->
+      <div class="card column-map-card" id="column-map-card" style="display:none">
+        <div class="card-header">
+          <h3 data-i18n="col_map_title">Column Type Map</h3>
+          <span class="badge" id="col-map-badge">-</span>
+        </div>
+        <div class="column-type-list" id="column-type-list"></div>
+      </div>
+    </section>
+
+    <!-- ===== SECTION: PROFILE ===== -->
+    <section class="section" id="section-profile">
+      <div class="section-header">
+        <h2 data-i18n="profile_title">My Profile</h2>
+        <p data-i18n="profile_sub">Edit your display name and profile photo.</p>
+      </div>
+      <div class="profile-grid">
+        <div class="profile-card card">
+          <div class="profile-card-header">
+            <div class="profile-avatar" id="profile-avatar">
+              <img id="profile-avatar-img" src="" alt="Profile Photo" />
+              <span id="profile-avatar-fallback"></span>
+            </div>
+            <div class="profile-details">
+              <div class="profile-name" id="profile-display-name"></div>
+              <div class="profile-username" id="profile-username"></div>
+            </div>
+          </div>
+          <div class="profile-summary" id="profile-summary"></div>
+        </div>
+
+        <div class="profile-form-card card">
+          <form id="profile-form" class="profile-form">
+            <label for="display-name">Display Name</label>
+            <input id="display-name" name="display_name" type="text" placeholder="Your display name">
+            <label for="profile-photo">Profile Photo</label>
+            <input id="profile-photo" name="photo" type="file" accept="image/png,image/jpeg,image/gif">
+            <div class="profile-actions">
+              <button class="btn-primary" type="submit">Update Profile</button>
+              <span class="profile-status" id="profile-status"></span>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="profile-history-card card">
+        <div class="card-header">
+          <div>
+            <h3 data-i18n="history_title">Dataset History</h3>
+            <p class="history-subtitle" data-i18n="history_sub">Datasets you have used before can be reopened anytime.</p>
+          </div>
+          <button class="btn-secondary history-refresh-btn" type="button" onclick="loadDatasetHistory()">
+            <span data-i18n="history_refresh">Refresh</span>
+          </button>
+        </div>
+        <div class="history-list" id="dataset-history-list">
+          <div class="history-empty" data-i18n="history_loading">Loading dataset history...</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SECTION: UPLOAD ===== -->
+    <section class="section" id="section-upload">
+      <div class="section-header">
+        <h2 data-i18n="upload_title">Upload Dataset</h2>
+        <p data-i18n="upload_sub">Supported formats: Excel (.xlsx, .xls), CSV (.csv), Text (.txt)</p>
+      </div>
+
+      <div class="upload-top-row">
+        <div class="upload-panel card">
+          <div class="upload-area" id="upload-area">
+            <div class="upload-icon">
+              <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="40" cy="40" r="38" stroke="var(--accent)" stroke-width="2" stroke-dasharray="6 4" opacity="0.4"/>
+                <path d="M40 52V28M28 40l12-12 12 12" stroke="var(--accent)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <p class="upload-main" data-i18n="upload_drag">Drag & Drop your file here</p>
+            <p class="upload-or" data-i18n="upload_or">or</p>
+            <label class="btn-primary" for="file-input">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              <span data-i18n="upload_browse">Browse File</span>
+            </label>
+            <input type="file" id="file-input" accept=".xlsx,.xls,.csv,.txt" style="display:none" />
+            <p class="upload-hint" data-i18n="upload_hint">Max file size: 50MB</p>
+          </div>
+        </div>
+
+        <div class="dataset-card card" id="upload-side-wrapper" style="display:none">
+          <div class="card-header">
+            <h3 data-i18n="dataset_info_title">Dataset Info</h3>
+          </div>
+          <div class="upload-result-header">
+            <div class="result-icon success-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <div>
+              <div class="result-filename" id="result-filename">-</div>
+              <div class="result-meta" id="result-meta">-</div>
+            </div>
+          </div>
+          <div class="result-grid" id="result-grid"></div>
+          <div class="result-actions">
+            <button class="btn-primary" onclick="switchSection('preview')">
+              <span data-i18n="view_preview">View Data Preview</span>
+            </button>
+            <button class="btn-secondary" onclick="switchSection('stats-numerical')">
+              <span data-i18n="view_stats">View Statistics</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Upload Progress -->
+      <div class="upload-grid upload-progress-grid">
+        <div class="upload-progress" id="upload-progress" style="display:none">
+          <div class="progress-bar-wrap">
+            <div class="progress-bar-fill" id="progress-fill"></div>
+          </div>
+          <p id="progress-label" data-i18n="uploading">Uploading and analyzing...</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SECTION: DATA PREVIEW ===== -->
+    <section class="section" id="section-preview">
+      <div class="section-header">
+        <h2 data-i18n="preview_title">Data Preview</h2>
+        <p id="preview-meta-label">-</p>
+      </div>
+      <div class="card">
+        <div class="table-controls">
+          <div class="table-search">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input type="text" id="table-search" placeholder="Search..." data-i18n-placeholder="search_placeholder" />
+          </div>
+          <div class="table-pagination">
+            <button class="btn-icon" id="prev-page" disabled>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+            </button>
+            <span id="page-info">- / -</span>
+            <button class="btn-icon" id="next-page" disabled>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+            </button>
+          </div>
+        </div>
+        <div class="table-wrapper">
+          <div class="table-responsive-container">
+            <table class="data-table" id="data-table">
+              <thead id="table-head"></thead>
+              <tbody id="table-body"></tbody>
+            </table>
+          </div>
+          <div class="table-empty" id="table-empty" data-i18n="table_empty">No data loaded yet. Please upload a file first.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SECTION: NUMERICAL STATS ===== -->
+    <section class="section" id="section-stats-numerical">
+      <div class="section-header">
+        <h2 data-i18n="num_stats_title">Numerical Statistics</h2>
+        <p data-i18n="num_stats_sub">Comprehensive descriptive statistics for all numerical variables</p>
+      </div>
+
+      <div id="num-stats-empty" class="empty-state">
+        <div class="empty-icon">📊</div>
+        <p data-i18n="stats_empty">No dataset loaded. Please upload a file first.</p>
+        <button class="btn-primary" onclick="switchSection('upload')" data-i18n="go_upload">Go to Upload</button>
+      </div>
+
+      <div id="num-stats-container" style="display:none"></div>
+    </section>
+
+    <!-- ===== SECTION: CATEGORICAL STATS ===== -->
+    <section class="section" id="section-stats-categorical">
+      <div class="section-header">
+        <h2 data-i18n="cat_stats_title">Categorical Statistics</h2>
+        <p data-i18n="cat_stats_sub">Frequency analysis and distribution for categorical variables</p>
+      </div>
+
+      <div id="cat-stats-empty" class="empty-state">
+        <div class="empty-icon">🏷️</div>
+        <p data-i18n="stats_empty">No dataset loaded. Please upload a file first.</p>
+        <button class="btn-primary" onclick="switchSection('upload')" data-i18n="go_upload">Go to Upload</button>
+      </div>
+
+      <div id="cat-stats-container" style="display:none"></div>
+    </section>
+
+
+    <!-- ===== SECTION: VIZ NUMERIK ===== -->
+    <section class="section" id="section-viz-numerical">
+      <div class="section-header">
+        <h2 data-i18n="page_viz_num">Numerical Visualization</h2>
+        <p data-i18n="viz_num_sub">Histogram, Boxplot, Density Plot, QQ Plot &amp; Violin Plot</p>
+      </div>
+      <div id="viz-num-empty" class="empty-state">
+        <div class="empty-icon">📉</div>
+        <p data-i18n="stats_empty">No dataset loaded. Please upload a file first.</p>
+        <button class="btn-primary" onclick="switchSection('upload')" data-i18n="go_upload">Go to Upload</button>
+      </div>
+      <div id="viz-num-container" style="display:none"></div>
+    </section>
+
+    <!-- ===== SECTION: VIZ KATEGORIKAL ===== -->
+    <section class="section" id="section-viz-categorical">
+      <div class="section-header">
+        <h2 data-i18n="page_viz_cat">Categorical Visualization</h2>
+        <p data-i18n="viz_cat_sub">Bar Chart, Pie Chart, Count Plot &amp; Pareto Chart</p>
+      </div>
+      <div id="viz-cat-empty" class="empty-state">
+        <div class="empty-icon">🏷️</div>
+        <p data-i18n="stats_empty">No dataset loaded. Please upload a file first.</p>
+        <button class="btn-primary" onclick="switchSection('upload')" data-i18n="go_upload">Go to Upload</button>
+      </div>
+      <div id="viz-cat-container" style="display:none"></div>
+    </section>
+
+    <!-- ===== SECTION: VIZ BIVARIATE ===== -->
+    <section class="section" id="section-viz-bivariate">
+      <div class="section-header">
+        <h2 data-i18n="page_viz_biv">Correlation &amp; Bivariate</h2>
+        <p data-i18n="viz_biv_sub">Scatter Plot, Heatmap Correlation, Pair Plot &amp; Bubble Chart</p>
+      </div>
+      <div id="viz-biv-empty" class="empty-state">
+        <div class="empty-icon">🔗</div>
+        <p data-i18n="stats_empty">No dataset loaded. Please upload a file first.</p>
+        <button class="btn-primary" onclick="switchSection('upload')" data-i18n="go_upload">Go to Upload</button>
+      </div>
+      <div id="viz-biv-container" style="display:none">
+        <div class="viz-col-tabs" style="gap:12px;flex-wrap:wrap;align-items:center;margin-bottom:16px;">
+          <label style="font-size:0.85rem;opacity:0.7" id="biv-x-label" data-i18n="biv_x_label">Kolom X:</label>
+          <select class="viz-select" id="biv-x-select" style="min-width:150px;">
+            <option value="" data-i18n="select_column">-- Pilih Kolom --</option>
+          </select>
+          <label style="font-size:0.85rem;opacity:0.7" id="biv-y-label" data-i18n="biv_y_label">Kolom Y:</label>
+          <select class="viz-select" id="biv-y-select" style="min-width:150px;">
+            <option value="" data-i18n="select_column">-- Pilih Kolom --</option>
+          </select>
+          <label style="font-size:0.85rem;opacity:0.7" id="biv-z-label" data-i18n="biv_z_label">Kolom Z (Ukuran):</label>
+          <select class="viz-select" id="biv-z-select" style="min-width:150px;">
+            <option value="" data-i18n="select_column">-- Pilih Kolom --</option>
+          </select>
+          <label style="font-size:0.85rem;opacity:0.7" data-i18n="biv_type_label">Jenis Visual:</label>
+          <select class="viz-select" id="biv-type-select" style="min-width:170px;">
+            <option value="heatmap" data-i18n="biv_type_heatmap">Correlation Heatmap</option>
+            <option value="scatter" data-i18n="biv_type_scatter">Scatter Plot</option>
+            <option value="pair" data-i18n="biv_type_pair">Pair Plot</option>
+            <option value="bubble" data-i18n="biv_type_bubble">Bubble Chart</option>
+          </select>
+          <button class="btn-primary" id="btn-run-bivariate" style="padding:8px 18px;font-size:0.85rem" data-i18n="biv_btn_generate">
+            Generate
+          </button>
+        </div>
+        <div id="viz-biv-chart" class="card viz-card" style="min-height:400px;"></div>
+      </div>
+    </section>
+
+
+    <!-- ===== SECTION: VIZ CAT vs NUM ===== -->
+    <section class="section" id="section-viz-catnum">
+      <div class="section-header">
+        <h2 data-i18n="page_viz_cn">Categorical vs Numerical</h2>
+        <p data-i18n="viz_cn_sub">Boxplot, Violin, Grouped Bar &amp; Strip Plot by Category</p>
+      </div>
+      <div id="viz-cn-empty" class="empty-state">
+        <div class="empty-icon">📊</div>
+        <p data-i18n="stats_empty">No dataset loaded. Please upload a file first.</p>
+        <button class="btn-primary" onclick="switchSection('upload')" data-i18n="go_upload">Go to Upload</button>
+      </div>
+      <div id="viz-cn-container" style="display:none">
+        <div class="card" style="padding:18px;margin-bottom:16px;">
+          <div style="display:flex;flex-wrap:wrap;gap:20px;align-items:flex-end;">
+
+            <!-- Kolom Kategorik -->
+            <div style="flex:1 1 160px;min-width:150px;">
+              <label style="display:block;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.05em;opacity:0.6;margin-bottom:6px;" data-i18n="cn_cat_label">Kolom Kategorik</label>
+              <select class="viz-select" id="cn-cat-select" style="width:100%;">
+                <option value="" data-i18n="select_cat_column">-- Pilih Kolom Kategorik --</option>
+              </select>
+            </div>
+
+            <!-- Kolom Numerik -->
+            <div style="flex:1 1 160px;min-width:150px;">
+              <label style="display:block;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.05em;opacity:0.6;margin-bottom:6px;" data-i18n="cn_num_label">Kolom Numerik</label>
+              <select class="viz-select" id="cn-num-select" style="width:100%;">
+                <option value="" data-i18n="select_num_column">-- Pilih Kolom Numerik --</option>
+              </select>
+            </div>
+
+            <!-- Jenis Visual -->
+            <div style="flex:1 1 160px;min-width:150px;">
+              <label style="display:block;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.05em;opacity:0.6;margin-bottom:6px;" data-i18n="cn_type_label">Jenis Visual</label>
+              <select class="viz-select" id="cn-type-select" style="width:100%;">
+                <option value="boxplot" data-i18n="cn_type_boxplot">Boxplot</option>
+                <option value="violin" data-i18n="cn_type_violin">Violin Plot</option>
+                <option value="bar" data-i18n="cn_type_bar">Grouped Bar</option>
+                <option value="strip" data-i18n="cn_type_strip">Strip Plot</option>
+              </select>
+            </div>
+
+            <!-- Tombol Generate -->
+            <div style="flex:0 0 auto;">
+              <button class="btn-primary" id="btn-run-catnum" style="padding:9px 22px;font-size:0.85rem;white-space:nowrap;" data-i18n="cn_btn_generate">
+                ▶ Generate
+              </button>
+            </div>
+
+          </div>
+        </div>
+        <div id="viz-cn-chart" class="card viz-card" style="min-height:420px;"></div>
+      </div>
+    </section>
+
+    <!-- ===== SECTION: VIZ TIME SERIES ===== -->
+    <section class="section" id="section-viz-timeseries">
+      <div class="section-header">
+        <h2 data-i18n="page_viz_ts">Temporal Analytics</h2>
+        <p data-i18n="viz_ts_sub">Trend analysis, moving averages, and temporal patterns</p>
+      </div>
+      <div id="viz-ts-empty" class="empty-state">
+        <div class="empty-icon">⏳</div>
+        <p data-i18n="viz_ts_empty">No time/date columns detected in the dataset.</p>
+      </div>
+      <div id="viz-ts-container" style="display:none"></div>
+    </section>
+
+    <section class="section" id="section-insights">
+      <div class="section-header">
+        <h2 data-i18n="page_insights">Smart Insights</h2>
+        <p data-i18n="insights_sub">Automated interpretations generated from your data</p>
+      </div>
+      <div id="insights-empty" class="empty-state">
+        <div class="empty-icon">💡</div>
+        <p data-i18n="stats_empty">No dataset loaded. Please upload a file first.</p>
+        <button class="btn-primary" onclick="switchSection('upload')" data-i18n="go_upload">Go to Upload</button>
+      </div>
+      <div id="insights-container" style="display:none"></div>
+    </section>
+
+    <!-- ===== SECTION: OUR TEAM ===== -->
+    <section class="section" id="section-team">
+      <div class="section-header">
+        <h2 data-i18n="team_title">Our Team</h2>
+        <p data-i18n="team_sub">Kelompok 5 - Kelas B · Data Science Programming · ITSB</p>
+      </div>
+
+      <div class="team-grid">
+
+        <!-- Member 1 -->
+        <div class="team-card">
+          <div class="team-card-top">
+            <div class="team-avatar" style="background: linear-gradient(135deg, #00d4aa, #0099ff)">
+              <img src="/static/assets/images/member1.jpg" alt="Muhammad Nabil" onerror="this.style.display='none'" />
+              <span class="avatar-initials">MN</span>
+            </div>
+            <div class="team-role-badge leader-badge" data-i18n="role_lead">Project Lead</div>
+          </div>
+          <div class="team-card-body">
+            <h3 class="team-name">Muhammad Nabil Khairil Anam</h3>
+            <p class="team-role" data-i18n="role_lead_desc">Project Manager & Backend Developer</p>
+            <p class="team-nim">NIM: 52250066</p>
+          </div>
+          <div class="team-card-footer">
+            <a href="https://github.com/" target="_blank" class="team-link github-link" title="GitHub">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+            </a>
+            <a href="https://linkedin.com/" target="_blank" class="team-link linkedin-link" title="LinkedIn">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Member 2 -->
+        <div class="team-card">
+          <div class="team-card-top">
+            <div class="team-avatar" style="background: linear-gradient(135deg, #5b8fff, #af64ff)">
+              <img src="/static/assets/images/member2.jpg" alt="Chandra Rizal" onerror="this.style.display='none'" />
+              <span class="avatar-initials">CR</span>
+            </div>
+            <div class="team-role-badge backend-badge" data-i18n="role_backend">Backend Dev</div>
+          </div>
+          <div class="team-card-body">
+            <h3 class="team-name">Chandra Rizal Alamsyah</h3>
+            <p class="team-role" data-i18n="role_backend_desc">Backend Developer & Data Engineer</p>
+            <p class="team-nim">NIM: 52250068</p>
+          </div>
+          <div class="team-card-footer">
+            <a href="https://github.com/" target="_blank" class="team-link github-link" title="GitHub">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+            </a>
+            <a href="https://linkedin.com/" target="_blank" class="team-link linkedin-link" title="LinkedIn">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Member 3 -->
+        <div class="team-card">
+          <div class="team-card-top">
+            <div class="team-avatar" style="background: linear-gradient(135deg, #ff9933, #ff5050)">
+              <img src="/static/assets/images/member3.jpg" alt="Lulu Najla" onerror="this.style.display='none'" />
+              <span class="avatar-initials">LN</span>
+            </div>
+            <div class="team-role-badge frontend-badge" data-i18n="role_frontend">Frontend Dev</div>
+          </div>
+          <div class="team-card-body">
+            <h3 class="team-name">Lulu Najla Salsabilla</h3>
+            <p class="team-role" data-i18n="role_frontend_desc">Frontend Developer & UI/UX Designer</p>
+            <p class="team-nim">NIM: 52250069</p>
+          </div>
+          <div class="team-card-footer">
+            <a href="https://github.com/" target="_blank" class="team-link github-link" title="GitHub">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+            </a>
+            <a href="https://linkedin.com/" target="_blank" class="team-link linkedin-link" title="LinkedIn">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Member 4 -->
+        <div class="team-card">
+          <div class="team-card-top">
+            <div class="team-avatar" style="background: linear-gradient(135deg, #af64ff, #ff5050)">
+              <img src="/static/assets/images/member4.jpg" alt="Naila Syahrani" onerror="this.style.display='none'" />
+              <span class="avatar-initials">NS</span>
+            </div>
+            <div class="team-role-badge analyst-badge" data-i18n="role_analyst">Data Analyst</div>
+          </div>
+          <div class="team-card-body">
+            <h3 class="team-name">Naila Syahrani Putri</h3>
+            <p class="team-role" data-i18n="role_analyst_desc">Data Analyst & Statistics Expert</p>
+            <p class="team-nim">NIM: 52250070</p>
+          </div>
+          <div class="team-card-footer">
+            <a href="https://github.com/" target="_blank" class="team-link github-link" title="GitHub">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+            </a>
+            <a href="https://linkedin.com/" target="_blank" class="team-link linkedin-link" title="LinkedIn">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Member 5 -->
+        <div class="team-card">
+          <div class="team-card-top">
+            <div class="team-avatar" style="background: linear-gradient(135deg, #00d4aa, #af64ff)">
+              <img src="/static/assets/images/member5.jpg" alt="Dameria Adelina" onerror="this.style.display='none'" />
+              <span class="avatar-initials">DA</span>
+            </div>
+            <div class="team-role-badge viz-badge" data-i18n="role_viz">Visualization</div>
+          </div>
+          <div class="team-card-body">
+            <h3 class="team-name">Dameria Adelina Mini Simarmata</h3>
+            <p class="team-role" data-i18n="role_viz_desc">Data Visualization & Reporting</p>
+            <p class="team-nim">NIM: 52250071</p>
+          </div>
+          <div class="team-card-footer">
+            <a href="https://github.com/" target="_blank" class="team-link github-link" title="GitHub">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+            </a>
+            <a href="https://linkedin.com/" target="_blank" class="team-link linkedin-link" title="LinkedIn">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            </a>
+          </div>
+        </div>
+
+      </div><!-- end team-grid -->
+
+      <!-- Team Info Banner -->
+      <div class="team-banner">
+        <div class="team-banner-icon">🎓</div>
+        <div>
+          <div class="team-banner-title" data-i18n="team_course">SD-1306 Data Science Programming</div>
+          <div class="team-banner-sub" data-i18n="team_info">Kelompok 5 · Kelas B · Institut Teknologi Sains Bandung (ITSB)</div>
+        </div>
+        <div class="team-banner-lecturer">
+          <span data-i18n="team_lecturer">Lecturer:</span>
+          <strong>Bakti Siregar, M.Sc.</strong>
+        </div>
+      </div>
+
+    </section>
+
+
+    <!-- ===== SECTION: VIZ COMPARISON ===== -->
+    <section class="section" id="section-viz-comparison">
+      <div class="section-header">
+        <h2 data-i18n="page_viz_comp">Visual Comparison</h2>
+        <p data-i18n="viz_comp_sub">Bandingkan distribusi antar kolom secara visual dalam satu tampilan</p>
+      </div>
+      <div id="viz-comp-empty" class="empty-state">
+        <div class="empty-icon">📊</div>
+        <p data-i18n="stats_empty">No dataset loaded. Please upload a file first.</p>
+        <button class="btn-primary" onclick="switchSection('upload')" data-i18n="go_upload">Go to Upload</button>
+      </div>
+      <div id="viz-comp-container" style="display:none">
+        <div class="card" style="padding:18px;margin-bottom:16px;">
+          <div style="display:flex;flex-wrap:wrap;gap:20px;align-items:flex-start;">
+
+            <!-- Dropdown: Jenis Visual -->
+            <div style="flex:1 1 200px;min-width:180px;">
+              <label style="display:block;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.05em;opacity:0.6;margin-bottom:6px;" data-i18n="comp_type_label">Jenis Visual</label>
+              <select class="viz-select" id="comp-type-select" style="width:100%;">
+                <option value="histogram" data-i18n="comp_type_histogram">Histogram Overlay</option>
+                <option value="boxplot" data-i18n="comp_type_boxplot">Boxplot Comparison</option>
+                <option value="violin" data-i18n="comp_type_violin">Violin Comparison</option>
+                <option value="bar" data-i18n="comp_type_bar_cat">Bar Comparison (Categorical)</option>
+              </select>
+            </div>
+
+            <!-- Pilih Kolom -->
+            <div style="flex:2 1 300px;">
+              <label style="display:block;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.05em;opacity:0.6;margin-bottom:6px;" data-i18n="comp_col_label">Pilih Kolom <span style="opacity:0.45;font-weight:400;text-transform:none" data-i18n="comp_col_max">(maks 5)</span></label>
+              <div id="comp-col-checkboxes" style="display:flex;flex-wrap:wrap;gap:8px;min-height:36px;align-items:center;">
+                <span style="opacity:0.4;font-size:0.85rem;font-style:italic" data-i18n="comp_loading_cols">Memuat kolom...</span>
+              </div>
+            </div>
+
+            <!-- Tombol Generate -->
+            <div style="flex:0 0 auto;display:flex;align-items:flex-end;">
+              <button class="btn-primary" id="btn-run-comparison" style="padding:9px 22px;font-size:0.85rem;white-space:nowrap;" data-i18n="comp_btn_run">
+                ▶ Tampilkan Comparison
+              </button>
+            </div>
+
+          </div>
+        </div>
+        <div id="viz-comp-chart" class="card viz-card" style="margin-top:1rem;min-height:400px;"></div>
+        <div id="viz-comp-stats" style="margin-top:1rem;display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;"></div>
+      </div>
+    </section>
+
+    <!-- ===== SECTION: DATA CLEANING ===== -->
+    <section class="section" id="section-data-cleaning">
+      <div class="section-header">
+        <h2 data-i18n="cleaning_title">🧹 Data Cleaning</h2>
+        <p data-i18n="cleaning_sub">Identifikasi dan bersihkan data kotor: missing values, duplikat, outlier, dan lainnya</p>
+      </div>
+      <div id="cleaning-empty" class="empty-state">
+        <div class="empty-icon">🧹</div>
+        <p data-i18n="stats_empty">No dataset loaded. Please upload a file first.</p>
+        <button class="btn-primary" onclick="switchSection('upload')" data-i18n="go_upload">Go to Upload</button>
+      </div>
+      <div id="cleaning-container" style="display:none">
+        <!-- Summary Overview -->
+        <div id="cleaning-summary-cards" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px;margin-bottom:20px;"></div>
+
+        <!-- Issue Tabs -->
+        <div class="card" style="margin-bottom:16px;">
+          <div style="display:flex;gap:0;border-bottom:1px solid var(--border);">
+            <button class="cleaning-tab active" data-tab="missing" onclick="showCleaningTab('missing')">
+              <span data-i18n="cleaning_tab_missing">❓ Missing Values</span> <span class="cleaning-tab-badge" id="badge-missing">0</span>
+            </button>
+            <button class="cleaning-tab" data-tab="duplicates" onclick="showCleaningTab('duplicates')">
+              <span data-i18n="cleaning_tab_duplicates">🔁 Duplicates</span> <span class="cleaning-tab-badge" id="badge-duplicates">0</span>
+            </button>
+            <button class="cleaning-tab" data-tab="outliers" onclick="showCleaningTab('outliers')">
+              <span data-i18n="cleaning_tab_outliers">⚠️ Outliers</span> <span class="cleaning-tab-badge" id="badge-outliers">0</span>
+            </button>
+            <button class="cleaning-tab" data-tab="types" onclick="showCleaningTab('types')">
+              <span data-i18n="cleaning_tab_types">🔤 Type Issues</span> <span class="cleaning-tab-badge" id="badge-types">0</span>
+            </button>
+            <button class="cleaning-tab" data-tab="whitespace" onclick="showCleaningTab('whitespace')">
+              <span data-i18n="cleaning_tab_whitespace">✂️ Whitespace</span> <span class="cleaning-tab-badge" id="badge-whitespace">0</span>
+            </button>
+          </div>
+
+          <div id="cleaning-tab-missing" class="cleaning-tab-panel active" style="padding:20px;"></div>
+          <div id="cleaning-tab-duplicates" class="cleaning-tab-panel" style="padding:20px;display:none;"></div>
+          <div id="cleaning-tab-outliers" class="cleaning-tab-panel" style="padding:20px;display:none;"></div>
+          <div id="cleaning-tab-types" class="cleaning-tab-panel" style="padding:20px;display:none;"></div>
+          <div id="cleaning-tab-whitespace" class="cleaning-tab-panel" style="padding:20px;display:none;"></div>
+        </div>
+
+        <!-- Cleaning Actions Panel -->
+        <div class="card" id="cleaning-actions-panel" style="padding:24px;">
+          <h3 style="margin-top:0;" data-i18n="cleaning_actions_title">⚙️ Pilih Aksi Pembersihan</h3>
+          <p style="opacity:0.7;font-size:0.9rem;" data-i18n="cleaning_actions_sub">Pilih tindakan yang ingin diterapkan pada dataset. Data asli tidak akan dihapus - hasil akan disimpan sebagai file baru.</p>
+          <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;margin-top:16px;">
+            
+            <div class="cleaning-action-card">
+              <div class="cleaning-action-title" data-i18n="cleaning_action_title_missing">❓ Missing Values</div>
+              <select class="viz-select" id="action-missing" style="width:100%">
+                <option value="" data-i18n="cleaning_action_leave">- Biarkan (tidak diubah) -</option>
+                <option value="drop_rows" data-i18n="cleaning_action_drop_rows">Hapus baris yang memiliki missing value</option>
+                <option value="fill_mean" data-i18n="cleaning_action_fill_mean">Isi dengan rata-rata (mean)</option>
+                <option value="fill_median" data-i18n="cleaning_action_fill_median">Isi dengan median</option>
+                <option value="fill_mode" data-i18n="cleaning_action_fill_mode">Isi dengan nilai terbanyak (mode)</option>
+              </select>
+            </div>
+
+            <div class="cleaning-action-card">
+              <div class="cleaning-action-title" data-i18n="cleaning_action_title_duplicates">🔁 Duplicate Rows</div>
+              <label style="display:flex;align-items:center;gap:8px;cursor:pointer">
+                <input type="checkbox" id="action-duplicates" style="width:16px;height:16px;cursor:pointer">
+                <span data-i18n="cleaning_action_duplicates_label">Hapus semua baris duplikat</span>
+              </label>
+            </div>
+
+            <div class="cleaning-action-card">
+              <div class="cleaning-action-title" data-i18n="cleaning_action_title_outliers">⚠️ Outliers (IQR Method)</div>
+              <select class="viz-select" id="action-outliers" style="width:100%">
+                <option value="" data-i18n="cleaning_action_leave">- Biarkan (tidak diubah) -</option>
+                <option value="remove" data-i18n="cleaning_action_outliers_remove">Hapus baris yang mengandung outlier</option>
+                <option value="cap" data-i18n="cleaning_action_outliers_cap">Winsorize (clamp ke batas IQR)</option>
+              </select>
+            </div>
+
+            <div class="cleaning-action-card">
+              <div class="cleaning-action-title" data-i18n="cleaning_action_title_types">🔤 Tipe Data</div>
+              <label style="display:flex;align-items:center;gap:8px;cursor:pointer">
+                <input type="checkbox" id="action-types" style="width:16px;height:16px;cursor:pointer">
+                <span data-i18n="cleaning_action_types_label">Konversi kolom numerik yang disimpan sebagai teks</span>
+              </label>
+            </div>
+
+            <div class="cleaning-action-card">
+              <div class="cleaning-action-title" data-i18n="cleaning_action_title_whitespace">✂️ Whitespace</div>
+              <label style="display:flex;align-items:center;gap:8px;cursor:pointer">
+                <input type="checkbox" id="action-whitespace" style="width:16px;height:16px;cursor:pointer">
+                <span data-i18n="cleaning_action_whitespace_label">Hapus spasi berlebih di awal/akhir teks</span>
+              </label>
+            </div>
+          </div>
+
+          <div style="margin-top:24px;display:flex;gap:12px;flex-wrap:wrap;align-items:center;">
+            <button class="btn-primary" id="btn-apply-cleaning" onclick="applyCleaning()" data-i18n="cleaning_action_apply">
+              🧹 Terapkan Pembersihan
+            </button>
+            <button class="btn-secondary" onclick="reAnalyzeCleaning()" data-i18n="cleaning_action_reanalyze">
+              🔄 Analisis Ulang
+            </button>
+          </div>
+        </div>
+
+        <!-- Cleaning Result -->
+        <div id="cleaning-result" style="display:none;margin-top:16px;">
+          <div class="card" style="padding:24px;">
+            <h3 style="margin-top:0;color:var(--success,#28c76f)" data-i18n="cleaning_result_title">✅ Data Berhasil Dibersihkan!</h3>
+            <div id="cleaning-result-body"></div>
+            <div style="margin-top:20px;display:flex;gap:12px;flex-wrap:wrap;">
+              <button class="btn-primary" id="btn-use-cleaned" onclick="useCleanedDataset()" data-i18n="cleaning_use_cleaned">
+                📂 Gunakan Dataset Bersih
+              </button>
+              <button class="btn-secondary" onclick="downloadCleanedFile('csv')" data-i18n="cleaning_download_csv">
+                ⬇ Download CSV
+              </button>
+              <button class="btn-secondary" onclick="downloadCleanedFile('excel')" data-i18n="cleaning_download_excel">
+                ⬇ Download Excel
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<!-- Toast Notification -->
+<div class="toast" id="toast"></div>
+
+<!-- Loading Overlay -->
+<div class="loading-overlay" id="loading-overlay" style="display:none">
+  <div class="loading-spinner">
+    <div class="spinner-ring"></div>
+    <p id="loading-text" data-i18n="loading_analyze">Analyzing...</p>
+  </div>
+</div>
+
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

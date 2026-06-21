@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark" data-lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Register - Auto EDA Insight</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+</head>
+<body class="login-page">
+  <div class="login-panel">
+    <h1>Daftar Akun Baru</h1>
+    <p>Buat akun untuk mengakses platform AutoEDA.</p>
+    {% if success %}
+      <div class="login-success">{{ success }}</div>
+    {% endif %}
+    {% if error %}
+      <div class="login-error">{{ error }}</div>
+    {% endif %}
+    <form method="post" action="{{ url_for('register') }}">
+      <label for="username">Nama Pengguna</label>
+      <input id="username" name="username" type="text" autocomplete="username" value="{{ username }}" placeholder="Nama pengguna" required>
+      <label for="password">Kata Sandi</label>
+      <input id="password" name="password" type="password" autocomplete="new-password" placeholder="Minimal 6 karakter" required>
+      <label for="confirm_password">Konfirmasi Kata Sandi</label>
+      <input id="confirm_password" name="confirm_password" type="password" autocomplete="new-password" placeholder="Ketik ulang kata sandi" required>
+      <div class="login-actions">
+        <button class="btn-primary" type="submit">Daftar</button>
+        <a class="btn-secondary" href="{{ url_for('login') }}">Kembali ke Login</a>
+      </div>
+    </form>
+  </div>
+</body>
+</html>

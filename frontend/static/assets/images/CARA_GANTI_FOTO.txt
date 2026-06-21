@@ -1,0 +1,20 @@
+CARA MENAMBAHKAN FOTO ANGGOTA
+==============================
+
+1. Siapkan foto masing-masing anggota (format JPG atau PNG)
+2. Rename file fotonya menjadi:
+   - member1.jpg  → Muhammad Nabil Khairil Anam
+   - member2.jpg  → Chandra Rizal Alamsyah
+   - member3.jpg  → Lulu Najla Salsabilla
+   - member4.jpg  → Naila Syahrani Putri
+   - member5.jpg  → Dameria Adelina Mini Simarmata
+
+3. Letakkan semua file foto di folder ini:
+   frontend/static/assets/images/
+
+4. Refresh browser (Ctrl+F5), foto akan otomatis muncul.
+
+CATATAN:
+- Kalau foto belum ada, akan tampil inisial nama otomatis
+- Ukuran foto ideal: 200x200 pixel (persegi)
+- Format yang didukung: .jpg, .jpeg, .png
